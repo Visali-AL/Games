@@ -589,6 +589,254 @@
       "dominoes": [
         [6,4],[5,0],[6,3],[4,0],[3,2],[1,1],[0,0],[3,3],[1,6],[5,2],[1,0]
       ]
+    },
+    {
+      "no_of_nodes": 20,
+      "nodes": ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T"],
+      "node_details": {
+        "A": {
+          "peers": [
+            "B",
+            "C"
+          ],
+          "expression": "A+C=10",
+          "partners_in_expression": ["C"]
+        },
+        "B": {
+          "peers": [
+            "A",
+            "D"
+          ],
+          "expression": "ANY"
+        },
+        "C": {
+          "peers": [
+            "A",
+            "E",
+            "D"
+          ],
+          "expression": "C>3",
+          "partners_in_expression": [
+          ]
+        },
+        "D": {
+          "peers": [
+            "C",
+            "B",
+            "F"
+          ],
+          "expression": "D=F=H=J=L=N=O=P",
+          "partners_in_expression": [
+            "F",
+            "H",
+            "J",
+            "L",
+            "N",
+            "O",
+            "P"
+          ]
+        },
+        "E": {
+          "peers": [
+            "C",
+            "G",
+            "F"
+          ],
+          "expression": "C>3",
+          "partners_in_expression": [
+          ]
+        },
+        "F": {
+          "peers": [
+            "D",
+            "E",
+            "H"
+          ],
+          "expression": "D=F=H=J=L=N=O=P",
+          "partners_in_expression": [
+            "D",
+            "H",
+            "J",
+            "L",
+            "N",
+            "O",
+            "P"
+          ]
+        },
+        "G": {
+          "peers": [
+            "E",
+            "I",
+            "H"
+          ],
+          "expression": "G<2",
+          "partners_in_expression": [
+          ]
+        },
+        "H": {
+          "peers": [
+            "F",
+            "G",
+            "J"
+          ],
+          "expression": "D=F=H=J=L=N=O=P",
+          "partners_in_expression": [
+            "D",
+            "F",
+            "J",
+            "L",
+            "N",
+            "O",
+            "P"
+          ]
+        },
+        "I": {
+          "peers": [
+            "G","J","K"
+          ],
+          "expression": "I<3",
+          "partners_in_expression": [
+          ]
+        },
+        "J": {
+          "peers": [
+            "H","I","L"
+          ],
+          "expression": "D=F=H=J=L=N=O=P",
+          "partners_in_expression": [
+            "D",
+            "F",
+            "H",
+            "L",
+            "N",
+            "O",
+            "P"
+          ]
+        },
+        "K": {
+          "peers": [
+            "I",
+            "M",
+            "L"
+          ],
+          "expression": "ANY"
+        },
+        "L": {
+          "peers": [
+            "J",
+            "K",
+            "N"
+          ],
+          "expression": "D=F=H=J=L=N=O=P",
+          "partners_in_expression": [
+            "D",
+            "F",
+            "H",
+            "J",
+            "N",
+            "O",
+            "P"
+          ]
+        },
+        "M": {
+          "peers": [
+            "K",
+            "N",
+            "Q"
+          ],
+          "expression": "M+Q=0",
+          "partners_in_expression": [
+            "Q"
+          ]
+        },
+        "N": {
+          "peers": [
+            "L",
+            "M", "R", "O"
+          ],
+          "expression": "D=F=H=J=L=N=O=P",
+          "partners_in_expression": [
+            "D",
+            "F",
+            "H",
+            "J",
+            "L",
+            "O",
+            "P"
+          ]
+        },
+        "O": {
+          "peers": [
+            "N",
+            "P",
+            "S"
+          ],
+          "expression": "D=F=H=J=L=N=O=P",
+          "partners_in_expression": [
+            "D",
+            "F",
+            "H",
+            "J",
+            "L",
+            "N",
+            "P"
+          ]
+        },
+        "P": {
+          "peers": [
+            "O",
+            "T"
+          ],
+          "expression": "D=F=H=J=L=N=O=P",
+          "partners_in_expression": [
+            "D",
+            "F",
+            "H",
+            "J",
+            "L",
+            "N",
+            "O"
+          ]
+        },
+        "Q": {
+          "peers": [
+            "M",
+            "R"
+          ],
+          "expression": "M+Q=0",
+          "partners_in_expression": [
+            "M"
+          ]
+        },
+        "R": {
+          "peers": [
+            "Q",
+            "N",
+            "S"
+          ],
+          "expression": "ANY"
+        },
+        "S": {
+          "peers": [
+            "R",
+            "O",
+            "T"
+          ],
+          "expression": "S=T",
+          "partners_in_expression": ["T"]
+        },
+        "T": {
+          "peers": [
+            "S",
+            "P"
+          ],
+          "expression": "S=T",
+          "partners_in_expression": ["S"]
+        }
+      },
+      "dominoes": [
+        [0,5], [5,4], [4,6], [1,4],[2,4],[3,4],[0,4],[4,4],[0,1],[2,2]
+      ]
     }
   ]
 }
