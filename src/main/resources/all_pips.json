@@ -837,6 +837,148 @@
       "dominoes": [
         [0,5], [5,4], [4,6], [1,4],[2,4],[3,4],[0,4],[4,4],[0,1],[2,2]
       ]
+    },
+    {
+      "no_of_nodes": 10,
+      "nodes": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F",
+        "G",
+        "H",
+        "I",
+        "J"
+      ],
+      "node_details": {
+        "A": {
+          "peers": [
+            "B",
+            "C"
+          ],
+          "expression": "A=1",
+          "partners_in_expression": []
+        },
+        "B": {
+          "peers": [
+            "A",
+            "D"
+          ],
+          "expression": "B=D",
+          "partners_in_expression": [
+            "D"
+          ]
+        },
+        "C": {
+          "peers": [
+            "A",
+            "D",
+            "F"
+          ],
+          "expression": "C+F+H=11",
+          "partners_in_expression": [
+            "F",
+            "H"
+          ]
+        },
+        "D": {
+          "peers": [
+            "B",
+            "C",
+            "E"
+          ],
+          "expression": "D=B",
+          "partners_in_expression": [
+            "B"
+          ]
+        },
+        "E": {
+          "peers": [
+            "G",
+            "D"
+          ],
+          "expression": "E+G=12",
+          "partners_in_expression": [
+            "G"
+          ]
+        },
+        "F": {
+          "peers": [
+            "C",
+            "H"
+          ],
+          "expression": "F+C+H=11",
+          "partners_in_expression": [
+            "C",
+            "H"
+          ]
+        },
+        "G": {
+          "peers": [
+            "E",
+            "J"
+          ],
+          "expression": "G+E=12",
+          "partners_in_expression": [
+            "E"
+          ]
+        },
+        "H": {
+          "peers": [
+            "F",
+            "I"
+          ],
+          "expression": "H+F+C=11",
+          "partners_in_expression": [
+            "F",
+            "C"
+          ]
+        },
+        "I": {
+          "peers": [
+            "J",
+            "H"
+          ],
+          "expression": "I=J",
+          "partners_in_expression": [
+            "J"
+          ]
+        },
+        "J": {
+          "peers": [
+            "I",
+            "G"
+          ],
+          "expression": "J=I",
+          "partners_in_expression": [
+            "I"
+          ]
+        }
+      },
+      "dominoes": [
+        [
+          5,
+          3
+        ],
+        [
+          4,
+          4
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          6,
+          6
+        ]
+      ]
     }
   ]
 }

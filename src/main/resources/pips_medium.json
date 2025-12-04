@@ -1,87 +1,203 @@
 {
   "pips_medium_puzzles": [
     {
-      "no_of_nodes": 8,
-      "nodes": ["A", "B", "C", "D", "E", "F", "G", "H"],
-      "node_details":
-      {
+      "no_of_nodes": 16,
+      "nodes": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F",
+        "G",
+        "H",
+        "I",
+        "J",
+        "K",
+        "L",
+        "M",
+        "N",
+        "O",
+        "P"
+      ],
+      "node_details": {
         "A": {
           "peers": [
             "B",
-            "D"
+            "C"
           ],
-          "expression": "ANY"
+          "expression": "A+B=6",
+          "partners_in_expression": [
+            "B"
+          ]
         },
         "B": {
           "peers": [
             "A",
-            "C",
-            "E"
+            "D"
           ],
-          "expression": "ANY"
+          "expression": "A+B=6",
+          "partners_in_expression": [
+            "A"
+          ]
         },
         "C": {
           "peers": [
-            "B",
-            "F"
+            "A",
+            "D"
           ],
-          "expression": "C+H=6",
+          "expression": "C=6",
           "partners_in_expression": [
-            "H"
           ]
         },
         "D": {
           "peers": [
-            "A",
-            "G",
-            "E"
+            "B",
+            "H"
           ],
-          "expression": "D=3",
-          "partners_in_expression": []
+          "expression": "ANY"
         },
         "E": {
           "peers": [
-            "B",
-            "D",
-            "H"
+            "F",
+            "J"
           ],
-          "expression": "E+H=6",
+          "expression": "E=J=N=P",
           "partners_in_expression": [
-            "H"
+            "J",
+            "N",
+            "P"
           ]
         },
         "F": {
           "peers": [
-            "C",
-            "E"
+            "G",
+            "E",
+            "K"
           ],
-          "expression": "C+F=6",
+          "expression": "F+G=5",
           "partners_in_expression": [
-            "C"
+            "G"
           ]
         },
         "G": {
           "peers": [
-            "D",
-            "H"
+            "F",
+            "L"
           ],
-          "expression": "G=6",
-          "partners_in_expression": []
+          "expression": "F+G=5",
+          "partners_in_expression": ["F"
+          ]
         },
         "H": {
           "peers": [
-            "E",
-            "G"
+            "D",
+            "I"
           ],
-          "expression": "H=E",
+          "expression": "ANY"
+        },
+        "I": {
+          "peers": [
+            "J",
+            "H",
+            "M"
+          ],
+          "expression": "I=5"
+        },
+        "J": {
+          "peers": [
+            "I",
+            "N",
+            "E",
+            "K"
+          ],
+          "expression": "E=J=N=P",
           "partners_in_expression": [
-            "E"
+            "E",
+            "N",
+            "P"
+          ]
+        },
+        "K": {
+          "peers": [
+            "F",
+            "J",
+            "L"
+          ],
+          "expression": "K=5"
+        },
+        "L": {
+          "peers": [
+            "G",
+            "K"
+          ],
+          "expression": "L=5"
+        },
+        "M": {
+          "peers": [
+            "I",
+            "N",
+            "O"
+          ],
+          "expression": "ANY"
+        },
+        "N": {
+          "peers": [
+            "J",
+            "M",
+            "P"
+          ],
+          "expression": "E=J=N=P",
+          "partners_in_expression": [
+            "E",
+            "J",
+            "P"
+          ]
+        },
+        "O": {
+          "peers": [
+            "M",
+            "P"
+          ],
+          "expression": "O>3"
+        },
+        "P": {
+          "peers": [
+            "N",
+            "O"
+          ],
+          "expression": "E=J=N=P",
+          "partners_in_expression": [
+            "E",
+            "J",
+            "N"
           ]
         }
       },
-      "dominoes": [
-        [3,4], [5,0], [2,1], [6,2]
-      ]
-    }
+        "dominoes": [
+          [
+            0,
+            3
+          ],
+          [
+            5,
+            0
+          ],
+          [
+            3,
+            2
+          ],
+          [
+            2,
+            5
+          ],
+          [
+            3,
+            6
+          ],
+          [0, 0],
+          [1,4], [6,5]
+        ]
+      }
   ]
 }
