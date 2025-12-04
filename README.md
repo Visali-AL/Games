@@ -26,10 +26,10 @@ Pip: 6 found in Dominoes: [Domino[pip1=6, pip2=3], Domino[pip1=6, pip2=5]]<br>
 Remaining domino: {0=[], 1=[], 2=[], 3=[], 4=[], 5=[], 6=[]}<br>
 
 <br><br><br>
-And then the actual valid output that helped me solve in a couple of seconds, which otherwise would've taken a few minutes! 
+And then the actual valid output! Olaf helped me solve it in a couple of seconds, which would have otherwise taken a few minutes. 
 <img width="1170" height="1448" alt="image" src="https://github.com/user-attachments/assets/b1e20b7c-b8f0-449b-bbbf-cd84c8f64b22" />
 
 <br><br><br>
-I feel very honoured just to have read and understood Sir Donald E. Knuth's paper, written in 2000, on Dancing Links. I'm going to honour his legacy in my own way!
+I feel very honoured just to have read and understood Sir Donald E. Knuth's paper, written in 2000, on Dancing Links. I'm going to honour his legacy in my own way by building this solver using the DLX algorithm! (or DL-Pips to be precise)
 For those who're interested
 https://www.ocf.berkeley.edu/~jchu/publicportal/sudoku/0011047.pdf
