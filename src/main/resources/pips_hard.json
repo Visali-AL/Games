@@ -1,245 +1,251 @@
 {
   "pips_medium_puzzles": [
     {
-      "no_of_nodes": 23,
-      "nodes": ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V"],
+      "no_of_nodes": 20,
+      "nodes": ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T"],
       "node_details": {
         "A": {
           "peers": [
             "B",
-            "E"
+            "C"
           ],
-          "expression": "ANY"
+          "expression": "A+C=10",
+          "partners_in_expression": ["C"]
         },
         "B": {
           "peers": [
             "A",
-            "F"
+            "D"
           ],
-          "expression": "B>2",
-          "partners_in_expression": [
-          ]
+          "expression": "ANY"
         },
         "C": {
           "peers": [
-            "D",
-            "G"
+            "A",
+            "E",
+            "D"
           ],
-          "expression": "C=G=L=M",
+          "expression": "C>3",
           "partners_in_expression": [
-            "G",
-            "L",
-            "M"
           ]
         },
         "D": {
           "peers": [
             "C",
-            "H"
+            "B",
+            "F"
           ],
-          "expression": "D=H",
+          "expression": "D=F=H=J=L=N=O=P",
           "partners_in_expression": [
-            "H"
+            "F",
+            "H",
+            "J",
+            "L",
+            "N",
+            "O",
+            "P"
           ]
         },
         "E": {
           "peers": [
-            "A",
-            "I",
+            "C",
+            "G",
             "F"
           ],
-          "expression": "E=F=I=J",
+          "expression": "C>3",
           "partners_in_expression": [
-            "F",
-            "I",
-            "J"
           ]
         },
         "F": {
           "peers": [
-            "B",
+            "D",
             "E",
-            "J"
+            "H"
           ],
-          "expression": "E=F=I=J",
+          "expression": "D=F=H=J=L=N=O=P",
           "partners_in_expression": [
-            "E",
-            "I",
-            "J"
+            "D",
+            "H",
+            "J",
+            "L",
+            "N",
+            "O",
+            "P"
           ]
         },
         "G": {
           "peers": [
-            "C",
-            "L",
+            "E",
+            "I",
             "H"
           ],
-          "expression": "C=G=L=M",
+          "expression": "G<2",
           "partners_in_expression": [
-            "C",
-            "L",
-            "M"
           ]
         },
         "H": {
           "peers": [
-            "D",
+            "F",
             "G",
-            "M"
+            "J"
           ],
-          "expression": "D=H",
+          "expression": "D=F=H=J=L=N=O=P",
           "partners_in_expression": [
-            "D"
+            "D",
+            "F",
+            "J",
+            "L",
+            "N",
+            "O",
+            "P"
           ]
         },
         "I": {
           "peers": [
-            "E",
-            "N",
-            "J"
+            "G","J","K"
           ],
-          "expression": "I=E=J=F",
+          "expression": "I<3",
           "partners_in_expression": [
-            "E",
-            "J",
-            "F"
           ]
         },
         "J": {
           "peers": [
-            "I",
-            "F",
-            "O"
+            "H","I","L"
           ],
-          "expression": "E=J=F=I",
+          "expression": "D=F=H=J=L=N=O=P",
           "partners_in_expression": [
-            "E",
+            "D",
             "F",
-            "I"
+            "H",
+            "L",
+            "N",
+            "O",
+            "P"
           ]
         },
         "K": {
           "peers": [
-            "Q"
+            "I",
+            "M",
+            "L"
           ],
           "expression": "ANY"
         },
         "L": {
           "peers": [
-            "G",
-            "M",
-            "S"
+            "J",
+            "K",
+            "N"
           ],
-          "expression": "C=G=L=M",
+          "expression": "D=F=H=J=L=N=O=P",
           "partners_in_expression": [
-            "C",
-            "G",
-            "M"
+            "D",
+            "F",
+            "H",
+            "J",
+            "N",
+            "O",
+            "P"
           ]
         },
         "M": {
           "peers": [
-            "H",
-            "L",
-            "T"
+            "K",
+            "N",
+            "Q"
           ],
-          "expression": "C=G=L=M",
+          "expression": "M+Q=0",
           "partners_in_expression": [
-            "C",
-            "G",
-            "L"
+            "Q"
           ]
         },
         "N": {
           "peers": [
-            "I",
-            "O"
+            "L",
+            "M", "R", "O"
           ],
-          "expression": "N>3",
+          "expression": "D=F=H=J=L=N=O=P",
           "partners_in_expression": [
+            "D",
+            "F",
+            "H",
+            "J",
+            "L",
+            "O",
+            "P"
           ]
         },
         "O": {
           "peers": [
             "N",
-            "J",
-            "P"
-          ],
-          "expression": "O+P+Q=17",
-          "partners_in_expression": [
             "P",
-            "Q"
+            "S"
+          ],
+          "expression": "D=F=H=J=L=N=O=P",
+          "partners_in_expression": [
+            "D",
+            "F",
+            "H",
+            "J",
+            "L",
+            "N",
+            "P"
           ]
         },
         "P": {
           "peers": [
             "O",
-            "Q",
-            "U"
+            "T"
           ],
-          "expression": "O+P+Q=17",
+          "expression": "D=F=H=J=L=N=O=P",
           "partners_in_expression": [
-            "O",
-            "Q"
+            "D",
+            "F",
+            "H",
+            "J",
+            "L",
+            "N",
+            "O"
           ]
         },
         "Q": {
           "peers": [
-            "K",
-            "P",
+            "M",
             "R"
           ],
-          "expression": "O+P+Q=17",
+          "expression": "M+Q=0",
           "partners_in_expression": [
-            "O",
-            "P"
+            "M"
           ]
         },
         "R": {
           "peers": [
             "Q",
+            "N",
             "S"
           ],
-          "expression": "R+S>9",
-          "partners_in_expression": [
-            "S"
-          ]
+          "expression": "ANY"
         },
         "S": {
           "peers": [
-            "L",
             "R",
-            "T",
-            "V"
+            "O",
+            "T"
           ],
-          "expression": "R+S>9",
-          "partners_in_expression": [
-            "R"
-          ]
+          "expression": "S=T",
+          "partners_in_expression": ["T"]
         },
         "T": {
           "peers": [
-            "M",
-            "S"
-          ],
-          "expression": "ANY"
-        },
-        "U": {
-          "peers": [
+            "S",
             "P"
           ],
-          "expression": "U>3",
-          "partners_in_expression": []
-        },
-        "V": {
-          "peers": [
-            "S"
-          ],
-          "expression": "ANY"
+          "expression": "S=T",
+          "partners_in_expression": ["S"]
         }
       },
       "dominoes": [
-        [6,4],[5,0],[6,3],[4,0],[3,2],[1,1],[0,0],[3,3],[1,6],[5,2],[1,0]
+        [0,5], [5,4], [4,6], [1,4],[2,4],[3,4],[0,4],[4,4],[0,1],[2,2]
       ]
     }
   ]

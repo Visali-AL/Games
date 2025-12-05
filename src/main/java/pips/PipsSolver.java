@@ -195,5 +195,3 @@ public class PipsSolver {
         }
     }
 }
-
-record Domino(int pip1, int pip2) {}
