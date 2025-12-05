@@ -14,6 +14,7 @@ public class PipsSolver {
     private static final HashMap<Integer, List<Domino>> availableDominoes = new HashMap<>();
     private static boolean debugEnabled = false;
     static final int MAX_DOMINO_VALUE = 7;
+    private static boolean isPuzzleSolved = false;
 
     static {
         input = readInput();
@@ -82,7 +83,8 @@ public class PipsSolver {
 
                                 LinkedHashSet<String> updatedLocalNodePartnerOrder = new LinkedHashSet<>(localNodePartnerOrder);
                                 updatedLocalNodePartnerOrder.removeAll(updatedAssignedValues.keySet());
-                                if(updatedLocalNodePartnerOrder.isEmpty()) {
+                                if(updatedLocalNodePartnerOrder.isEmpty() && !isPuzzleSolved) {
+                                    isPuzzleSolved = true;
                                     System.out.println("********* Puzzle Solved *********" + updatedAssignedValues);
                                     System.out.println("Remaining domino: " + updatedAvailableDominoes);
                                     return true;
@@ -100,9 +102,12 @@ public class PipsSolver {
                                     }
                                 }
 
-                                boolean result = solvePipsPuzzle(updatedLocalNodePartnerOrder.stream().toList().get(0), updatedLocalNodePartnerOrder, updatedAvailableDominoes, updatedAssignedValues);
-                                if(result) {
-                                    return true;
+                                if(!updatedLocalNodePartnerOrder.isEmpty()) {
+                                    boolean result = solvePipsPuzzle(updatedLocalNodePartnerOrder.stream().toList().get(0), updatedLocalNodePartnerOrder, updatedAvailableDominoes, updatedAssignedValues);
+                                    if (result && !isPuzzleSolved) {
+                                        isPuzzleSolved = true;
+                                        return true;
+                                    }
                                 }
                             } else {
                                 if(debugEnabled)
