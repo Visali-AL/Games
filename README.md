@@ -13,7 +13,6 @@ Update: I've now implemented the Dancing Links algorithm for Pips! It works like
 
 And here's my dear Olaf's output <3
 
-![img.png](img.png)
 
 <br><br><br>
 And then one of the accepted answers
@@ -30,7 +29,6 @@ https://www.ocf.berkeley.edu/~jchu/publicportal/sudoku/0011047.pdf
 Here's a peek into the DLX Pips Solver's answer for the same puzzle that Olaf solved. <br>
 JUST 29ms! And even to find all possible solutions, it does not go beyond 50ms.
 
-![img_1.png](img_1.png)
 
 I took out a specific puzzle that was referenced as one of the hardest puzzles by Paul Brown here (https://github.com/prb/pips-solver/tree/main) I just wanted to try out my DLX Pips on it, and it gave amazing results yet another time! It solved for one solution within 67 ms and all 43200 solutions in 2.7 seconds
 
