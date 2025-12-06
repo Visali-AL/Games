@@ -173,6 +173,8 @@ public class PipsSolver {
     public static void main(String[] args) {
         PipsSolver solver = new PipsSolver();
         if(isJsonLoaded()) {
+            System.out.println("Olaf Pips Solver is running...");
+            long start = System.currentTimeMillis();
 
             solver.sortNodesBasedOnPartners();
             solver.printNodePartnerOrder();
@@ -185,6 +187,8 @@ public class PipsSolver {
             availableNodes.remove(currentNode);
 
             solver.solvePipsPuzzle(currentNode, availableNodes, new HashMap<>(availableDominoes), new HashMap<>());
+            long end = System.currentTimeMillis();
+            System.out.println("\nOlaf Pips Solver finished in " + (end - start) + " ms.");
         }
     }
 

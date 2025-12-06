@@ -2,12 +2,12 @@ package pips_dlx;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
 import org.apache.commons.lang3.tuple.Pair;
-import pips.Domino;
 import pips.MathExpressionHelper;
 
 public class DLXPipsSolver {
@@ -15,16 +15,17 @@ public class DLXPipsSolver {
     private static final JsonNode input;
     private static final List<String> nodesList = new ArrayList<>();
     private static final List<Pair<Integer, Integer>> dominoList = new ArrayList<>();
-    private static final boolean isDebugMode = true;
+    private static final boolean isDebugMode = false;
+    private static final boolean solveAll = true;
 
     static {
-       input = readInput();
+        input = readInput();
     }
 
     public static JsonNode readInput() {
         ObjectMapper mapper = new ObjectMapper();
         try {
-            File file = new File("src/main/resources/pips_hard.json");
+            File file = new File("src/main/resources/pips_medium.json");
             return mapper.readTree(file);
         } catch (IOException e) {
             System.out.println("Failed to read input JSON. Check for file existence and format");
@@ -32,97 +33,93 @@ public class DLXPipsSolver {
         }
     }
 
-    private static void getNodesFromPuzzle() {
-        if (input != null && input.has("pips_medium_puzzles")) {
-            JsonNode puzzle = input.get("pips_medium_puzzles");
-            JsonNode nodeDetails = puzzle.get(0).get("node_details");
+    private static void getNodesFromPuzzle(JsonNode puzzle) {
+        if (puzzle != null && puzzle.has("node_details")) {
+            JsonNode nodeDetails = puzzle.get("node_details");
             nodeDetails.fields().forEachRemaining(entry -> nodesList.add(entry.getKey()));
-            if(isDebugMode) {
+            if (isDebugMode) {
                 System.out.println("Number of nodes in the puzzle: " + nodesList.size());
             }
         }
     }
 
-    private static void getDominoesFromPuzzle() {
-        if (input != null && input.has("pips_medium_puzzles")) {
-            JsonNode puzzle = input.get("pips_medium_puzzles");
-            JsonNode dominoes = puzzle.get(0).get("dominoes");
-            if(dominoes.isArray()) {
+    private static void getDominoesFromPuzzle(JsonNode puzzle) {
+        if (puzzle != null && puzzle.has("node_details")) {
+            JsonNode dominoes = puzzle.get("dominoes");
+            if (dominoes.isArray()) {
                 for (JsonNode domino : dominoes) {
                     int pip1 = domino.get(0).asInt();
                     int pip2 = domino.get(1).asInt();
                     dominoList.add(Pair.of(pip1, pip2));
                 }
             }
-            if(isDebugMode) {
+            if (isDebugMode) {
                 System.out.println("Number of dominoes in the puzzle: " + dominoList.size());
             }
         }
     }
 
     public static void main(String[] args) {
-        System.out.println("DLX PIPS Solver is running...");
-        getNodesFromPuzzle();
-        getDominoesFromPuzzle();
-        buildExactCoverMatrix();
+        if (input != null && input.has("pips_medium_puzzles")) {
+            JsonNode allPuzzles = input.get("pips_medium_puzzles");
+            for (JsonNode puzzle : allPuzzles) {
+                System.out.println("DLX PIPS Solver is running...");
+                long start = System.currentTimeMillis();
+                getNodesFromPuzzle(puzzle);
+                getDominoesFromPuzzle(puzzle);
+                buildExactCoverMatrix(puzzle);
+                long end = System.currentTimeMillis();
+                System.out.println("\nDLX PIPS Solver finished in " + (end - start) + " ms.");
+                clearGameState();
+            }
+        }
     }
 
-    private static boolean assignDominoToNode(int left, int right, String currentNode, String peerNode, HashMap<String, Integer> assignedValues) {
-        JsonNode subject = input.get("pips_medium_puzzles").get(0).get("node_details").get(currentNode);
-        JsonNode follower = input.get("pips_medium_puzzles").get(0).get("node_details").get(peerNode);
+    private static void clearGameState() {
+        nodesList.clear();
+        dominoList.clear();
+    }
 
-        String subjectExpr = subject.get("expression").asText();
-        String followerExpr = follower.get("expression").asText();
+    private static boolean assignDominoToNode(int left, int right, String currentNode, String peerNode, HashMap<String, Integer> assignedValues, JsonNode puzzle) {
+        String subjectExpr = puzzle.get("node_details").get(currentNode).get("expression").asText();
+        String followerExpr = puzzle.get("node_details").get(peerNode).get("expression").asText();
 
         HashMap<String, Integer> tempAssignedValues = new HashMap<>(assignedValues);
         tempAssignedValues.put(currentNode, left);
         tempAssignedValues.put(peerNode, right);
 
-        return  MathExpressionHelper.satisfies(subjectExpr, tempAssignedValues) &&
+        return MathExpressionHelper.satisfies(subjectExpr, tempAssignedValues) &&
                 MathExpressionHelper.satisfies(followerExpr, tempAssignedValues);
     }
 
-    private static void buildExactCoverMatrix() {
+    private static void buildExactCoverMatrix(JsonNode puzzle) {
         int columns = nodesList.size() + dominoList.size();
         List<int[]> exactCoverMatrix = new ArrayList<>();
         Set<String> peersSet = new HashSet<>();
 
-        for(String node : nodesList) {
-            JsonNode puzzles = input.get("pips_medium_puzzles");
-            for (JsonNode puzzle : puzzles) {
-                JsonNode nodeDetails = puzzle.get("node_details").get(node);
-                nodeDetails.get("peers").forEach(peerNode -> {
-                    if( peersSet.contains(node + peerNode.asText()) || peersSet.contains(peerNode.asText() + node)) {
-                        return;
+        for (String node : nodesList) {
+            JsonNode nodeDetails = puzzle.get("node_details").get(node);
+            nodeDetails.get("peers").forEach(peerNode -> {
+                if (peersSet.contains(node + peerNode.asText()) || peersSet.contains(peerNode.asText() + node)) {
+                    return;
+                }
+                peersSet.add(node + peerNode.asText());
+                for (Pair<Integer, Integer> domino : dominoList) {
+                    if (assignDominoToNode(domino.getLeft(), domino.getRight(), node, peerNode.asText(), new HashMap<>(), puzzle) ||
+                            (domino.getLeft().intValue() != domino.getRight().intValue() && assignDominoToNode(domino.getRight(), domino.getLeft(), node, peerNode.asText(), new HashMap<>(), puzzle))) {
+                        int[] row = new int[columns];
+                        int nodeIndex = nodesList.indexOf(node);
+                        int peerIndex = nodesList.indexOf(peerNode.asText());
+                        int dominoIndex = dominoList.indexOf(domino) + nodesList.size();
+
+                        row[nodeIndex] = 1;
+                        row[peerIndex] = 1;
+                        row[dominoIndex] = 1;
+
+                        exactCoverMatrix.add(row);
                     }
-                    peersSet.add(node + peerNode.asText());
-                    for (Pair<Integer, Integer> domino : dominoList) {
-                        if(assignDominoToNode(domino.getLeft(), domino.getRight(), node, peerNode.asText(), new HashMap<>())) {
-                            int[] row = new int[columns];
-                            int nodeIndex = nodesList.indexOf(node);
-                            int peerIndex = nodesList.indexOf(peerNode.asText());
-                            int dominoIndex = dominoList.indexOf(domino) + nodesList.size();
-
-                            row[nodeIndex] = 1;
-                            row[peerIndex] = 1;
-                            row[dominoIndex] = 1;
-
-                            exactCoverMatrix.add(row);
-                        } else if(assignDominoToNode(domino.getRight(), domino.getLeft(), node, peerNode.asText(), new HashMap<>())) {
-                            int[] row = new int[columns];
-                            int nodeIndex = nodesList.indexOf(node);
-                            int peerIndex = nodesList.indexOf(peerNode.asText());
-                            int dominoIndex = dominoList.indexOf(domino) + nodesList.size();
-
-                            row[nodeIndex] = 1;
-                            row[peerIndex] = 1;
-                            row[dominoIndex] = 1;
-
-                            exactCoverMatrix.add(row);
-                        }
-                    }
-                });
-            }
+                }
+            });
         }
 
         if (exactCoverMatrix.isEmpty()) {
@@ -139,12 +136,26 @@ public class DLXPipsSolver {
             }
         }
 
-        // Solve using DLX
-        DLX dlx = new DLX(matrix);
-        List<List<Integer>> solutions = dlx.solve();
+        solveUsingDLX(matrix);
+    }
 
-        if (solutions!= null && !solutions.isEmpty()) {
-            for(List<Integer> solution : solutions) {
+    private static void solveUsingDLX(int[][] matrix) {
+
+        DLX dlx = new DLX(matrix);
+        List<List<Integer>> solutions = new ArrayList<>();
+
+        if(!solveAll) {
+            List<Integer> firstSolution = dlx.solveFirst();
+            if(firstSolution != null) {
+                solutions.add(firstSolution);
+            }
+        } else {
+            solutions = dlx.solve();
+            System.out.println("\nTotal solutions found: " + (solutions != null ? solutions.size() : 0));
+        }
+
+        if (solutions != null && !solutions.isEmpty()) {
+            for (List<Integer> solution : solutions) {
                 System.out.println("\nSolution found! Selected rows: " + solution);
                 System.out.println("\nDomino placements:");
                 for (int rowIndex : solution) {
